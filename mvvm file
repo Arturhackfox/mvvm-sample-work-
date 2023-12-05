@@ -1,6 +1,3 @@
-
-import Foundation
-
 struct MovieModel {
     let title: String
     let genre: Genre
@@ -27,6 +24,8 @@ enum Genre {
 // MovieManager - classroom where all action are happening within that classroom.
 class MovieManager {
     
+    var movies = [MovieModel]()
+    
     // public
     public var movie1 = MovieModel(title: "Avatar", genre: .adventure, isFavourite: false)
     
@@ -43,12 +42,32 @@ class MovieManager {
     func changeFirstMovie( newFavValue: Bool) {
         movie1 = movie1.changeFavImmutable(to: true)
     }
+    
+    func addTestMovie(){
+        let newMovie = MovieModel(title: "test", genre: .action, isFavourite: false)
+        movies.append(newMovie)
+    }
+    
+    func removeMovieAt(index: Int){
+        movies.remove(at: index)
+    }
 }
 
 
 let manager = MovieManager()
+
+manager.addTestMovie()
+print(manager.movies)
+manager.removeMovieAt(index: 0)
+print(manager.movies)
+
+
+
 manager.movie1.changeFavourite(to: true)
 print(manager.movie1)
+
+
+
 
 // changing value right from struct by replacing old instance with a new one
 manager.movie1 = manager.movie1.changeFavImmutable(to: false)
